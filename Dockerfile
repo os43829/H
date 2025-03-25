@@ -1,5 +1,4 @@
-FROM ubuntu:latest
-
+FROM debian:latest  
 
 RUN apt update && apt install -y \
     tigervnc-standalone-server xfce4 xfce4-goodies wget unzip curl
