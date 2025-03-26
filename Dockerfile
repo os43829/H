@@ -14,7 +14,7 @@ RUN wget -O /root/ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-li
 
 
 ARG NGROK_AUTHTOKEN
-RUN /root./ngrok config add-authtoken "2eo6HO8vzzr1QGTkFpICHCzSwjn_3u3VJzgaiartWyJm3BGoL"
+RUN ./root/ngrok config add-authtoken "2eo6HO8vzzr1QGTkFpICHCzSwjn_3u3VJzgaiartWyJm3BGoL"
 
 
 RUN echo '#!/bin/bash\n\
