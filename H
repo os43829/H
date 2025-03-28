@@ -19,4 +19,4 @@ unzip ngrok-stable-linux-amd64.zip
 mv ngrok /usr/local/bin
 cd /usr/local/bin
 ./ngrok config add-authtoken 2eo6HO8vzzr1QGTkFpICHCzSwjn_3u3VJzgaiartWyJm3BGoL
-nohup ngrok tcp 5901 &
+nohup ngrok tcp 5902 &
