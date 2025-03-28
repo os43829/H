@@ -1,0 +1,22 @@
+wget https://raw.githubusercontent.com/os43829/H/refs/heads/main/Dockerfile
+
+docker build -t mytigervnc-ngrok-debian .
+
+docker run -d --name mytigervnc-ngrok mytigervnc-ngrok-debian
+
+docker exec -it mytigervnc-ngrok sh
+
+vncserver 
+123456
+123456
+
+vncserver
+vncserver -kill :1
+
+wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-linux-amd64.zip
+
+unzip ngrok-stable-linux-amd64.zip 
+mv ngrok /usr/local/bin
+cd /usr/local/bin
+./ngrok config add-authtoken 2eo6HO8vzzr1QGTkFpICHCzSwjn_3u3VJzgaiartWyJm3BGoL
+nohup ngrok tcp 5901 &
