@@ -2,7 +2,7 @@ wget https://raw.githubusercontent.com/os43829/H/refs/heads/main/Dockerfile
 
 docker build -t mytigervnc-ngrok-debian .
 
-docker run -d --name mytigervnc-ngrok mytigervnc-ngrok-debian
+docker run -d --name mytigervnc-ngrok -it mytigervnc-ngrok-debian /bin/bash
 
 docker exec -it mytigervnc-ngrok sh
 
