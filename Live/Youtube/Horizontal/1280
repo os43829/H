@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# File to remember video path
+path_file=".videopath"
+# File to remember stream key
+key_file=".streamkey"
+
+# Step 1: Ask for video file name or full path
+read -p "Enter the video file name or full path (e.g., video.mp4 or /home/user/videos/video.mp4): " input_video
+
+# Check if input is full path or just filename
+if [[ "$input_video" != /* ]]; then
+  if [ -f "$path_file" ]; then
+    last_path=$(cat "$path_file")
+    input_video="$last_path/$input_video"
+  else
+    echo "Full path not saved earlier. Please provide full path first time."
+    exit 1
+  fi
+else
+  dir_path=$(dirname "$input_video")
+  echo "$dir_path" > "$path_file"
+fi
+
+# Check if file exists
+if [ ! -f "$input_video" ]; then
+  echo "File not found: $input_video"
+  exit 1
+fi
+
+# Step 2: Ask for stream key (optional input)
+if [ -f "$key_file" ]; then
+  last_key=$(cat "$key_file")
+  read -p "Enter your YouTube stream key (Press Enter to use last saved key): " stream_key
+  stream_key="${stream_key:-$last_key}"
+else
+  read -p "Enter your YouTube stream key: " stream_key
+fi
+
+# Save the stream key
+echo "$stream_key" > "$key_file"
+
+# Step 3: Run FFmpeg
+ffmpeg -stream_loop -1 -re -i "$input_video" \
+-c:v libx264 -preset ultrafast -b:v 5000k -maxrate 5000k -bufsize 8000k \
+-pix_fmt yuv420p -vf "scale=1280:720,fps=30" \
+-c:a aac -b:a 128k -ar 44100 \
+-f flv "rtmp://a.rtmp.youtube.com/live2/$stream_key"
