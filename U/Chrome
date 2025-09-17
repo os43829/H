@@ -1,0 +1,14 @@
+‎# PowerShell Script
+‎
+‎$chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+‎
+‎# एक बार define करो
+‎$WEB = "https://chromewebstore.google.com/detail/hoxx-vpn-proxy/nbcojefnccbanplpoffopkoepjmhgdgh"
+‎$VPN = "https://account3.hoxx.com/start/home"
+‎$URL = "https://www.youtube.com"
+‎
+‎# Profile 0 (Default)
+‎Start-Process $chrome -ArgumentList '--profile-directory="Default"', $WEB, $VPN, $URL
+‎
+‎# Profile 1
+‎Start-Process $chrome -ArgumentList '--profile-directory="Profile 1"', $WEB, $URL
